@@ -1,19 +1,5 @@
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Register from "/RegisterScreen";
-import Home from "/HomeScreen";
-import Login from "/LoginScreen"
+import { Redirect } from "expo-router";
 
-const Stack = createNativeStackNavigator();
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Register" component={RegisterScreen} />
-        <Stack.Screen name="Home" component={HomeScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+export default function Index() {
+  return <Redirect href="/Login" />;
 }

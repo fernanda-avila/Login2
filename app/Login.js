@@ -9,8 +9,9 @@ import {
 } from "react-native";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebaseConfig";
+import { Link, router } from "expo-router";
 
-export default function LoginScreen({ navigation }) {
+export default function LoginScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -22,11 +23,12 @@ export default function LoginScreen({ navigation }) {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      Alert.alert("Sucesso", "Login realizado!");
-      navigation.replace("Home");
+      Alert.alert("Sucesso", "Login realizado!", [
+        { text: "OK", onPress: () => router.replace("/Home") },
+      ]);
     } catch (error) {
       console.log(error);
-      Alert.alert("Erro", "Email ou senha incorretos");
+      Alert.alert("Erro de Login", error.message);
     }
   };
 
@@ -54,9 +56,11 @@ export default function LoginScreen({ navigation }) {
         <Text style={styles.buttonText}>Entrar</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-        <Text style={styles.link}>Criar conta</Text>
-      </TouchableOpacity>
+      <Link href="/Register" asChild>
+        <TouchableOpacity>
+          <Text style={styles.link}>Criar conta</Text>
+        </TouchableOpacity>
+      </Link>
     </View>
   );
 }

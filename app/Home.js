@@ -2,12 +2,12 @@ import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { auth } from "../firebaseConfig";
 import { signOut } from "firebase/auth";
+import { router } from "expo-router";
 
-
-export default function HomeScreen({ navigation }) {
+export default function HomeScreen() {
   const handleLogout = async () => {
     await signOut(auth);
-    navigation.replace("Login");
+    router.replace("/Login");
   };
 
   return (
